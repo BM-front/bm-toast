@@ -1,86 +1,87 @@
 {
-  "name": "@bm-front/bm-toast",
-  "version": "0.2.0",
-  "description": "Tiny TypeScript toast notifications with queue, callbacks and styles. Zero deps.",
-  "keywords": [
-    "toast",
-    "toasts",
-    "notification",
-    "notifications",
-    "vanilla",
-    "typescript",
-    "queue",
-    "progressbar",
-    "dom",
-    "browser",
-    "ui",
-    "scss",
-    "css",
-    "lightweight"
-  ],
-  "author": "BM-Front",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BM-front/bm-toast.git"
-  },
-  "bugs": {
-    "url": "https://github.com/BM-front/bm-toast/issues"
-  },
-  "homepage": "https://github.com/BM-front/bm-toast#readme",
-  "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "browser": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.js"
-    },
-    "./style.css": "./dist/style.css",
-    "./style.scss": "./dist/style.scss"
-  },
-  "style": "dist/style.css",
-  "files": [
-    "dist/"
-  ],
-  "sideEffects": [
-    "**/*.scss",
-    "dist/style.css"
-  ],
-  "publishConfig": {
-    "access": "public"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "scripts": {
-    "build": "rimraf dist && rollup -c",
-    "dev": "rollup -c -w",
-    "release": "node scripts/release.js",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run typecheck && npm run build",
-    "prepare": "npm run build"
-  },
-  "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.6",
-    "@rollup/plugin-node-resolve": "^16.0.1",
-    "@rollup/plugin-typescript": "^12.1.4",
-    "autoprefixer": "^10.4.21",
-    "cssnano": "^7.1.0",
-    "inquirer": "^12.9.3",
-    "ora": "^8.2.0",
-    "postcss": "^8.5.6",
-    "rimraf": "^6.0.1",
-    "rollup": "^4.47.1",
-    "rollup-plugin-copy": "^3.5.0",
-    "rollup-plugin-dts": "^6.2.3",
-    "rollup-plugin-postcss": "^4.0.2",
-    "sass": "^1.90.0",
-    "typescript": "^5.9.2",
-    "tslib": "^2.8.1"
-  }
+	"name": "@bm-front/bm-toast",
+	"version": "0.2.0",
+	"description": "Tiny TypeScript toast notifications with queue, callbacks and styles. Zero deps.",
+	"keywords": [
+		"toast",
+		"toasts",
+		"notification",
+		"notifications",
+		"vanilla",
+		"typescript",
+		"queue",
+		"progressbar",
+		"dom",
+		"browser",
+		"ui",
+		"scss",
+		"css",
+		"lightweight"
+	],
+	"author": "BM-Front",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/BM-front/bm-toast.git"
+	},
+	"bugs": {
+		"url": "https://github.com/BM-front/bm-toast/issues"
+	},
+	"homepage": "https://github.com/BM-front/bm-toast#readme",
+	"type": "module",
+	"main": "./dist/index.cjs",
+	"module": "./dist/index.js",
+	"browser": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs",
+			"default": "./dist/index.js"
+		},
+		"./style.css": "./dist/style.css",
+		"./style.scss": "./dist/style.scss"
+	},
+	"style": "dist/style.css",
+	"files": [
+		"dist/"
+	],
+	"sideEffects": [
+		"**/*.scss",
+		"dist/style.css"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"build": "rimraf dist && rollup -c",
+		"dev": "rollup -c -w",
+		"release": "node scripts/release.js",
+		"typecheck": "tsc --noEmit",
+		"prepublishOnly": "npm run typecheck && npm run build",
+		"prepare": "npm run build"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^28.0.6",
+		"@rollup/plugin-node-resolve": "^16.0.1",
+		"@rollup/plugin-typescript": "^12.1.4",
+		"autoprefixer": "^10.4.21",
+		"cssnano": "^7.1.0",
+		"inquirer": "^12.9.3",
+		"ora": "^8.2.0",
+		"postcss": "^8.5.6",
+		"rimraf": "^6.0.1",
+		"prettier-plugin-jsdoc": "^1.3.0",
+		"rollup": "^4.47.1",
+		"rollup-plugin-copy": "^3.5.0",
+		"rollup-plugin-dts": "^6.2.3",
+		"rollup-plugin-postcss": "^4.0.2",
+		"sass": "^1.90.0",
+		"typescript": "^5.9.2",
+		"tslib": "^2.8.1"
+	}
 }

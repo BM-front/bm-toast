@@ -1,77 +1,169 @@
 /* Базовые контейнеры (позиционирование — только через CSS) */
 .bm-toast-container {
-  position: fixed;
-  z-index: 9999;
-  display: flex;
-  gap: 8px;
-  pointer-events: none;
+	position: fixed;
+	z-index: 9999;
+	display: flex;
+	gap: 8px;
+	pointer-events: none;
 }
 
 /* Позиции */
-.bm-toast-container--top-right { top: 16px; right: 16px; flex-direction: column; align-items: flex-end; }
-.bm-toast-container--top-left { top: 16px; left: 16px; flex-direction: column; align-items: flex-start; }
-.bm-toast-container--bottom-right { bottom: 16px; right: 16px; flex-direction: column-reverse; align-items: flex-end; }
-.bm-toast-container--bottom-left { bottom: 16px; left: 16px; flex-direction: column-reverse; align-items: flex-start; }
-.bm-toast-container--top-center { top: 16px; left: 50%; transform: translateX(-50%); flex-direction: column; align-items: center; }
-.bm-toast-container--bottom-center { bottom: 16px; left: 50%; transform: translateX(-50%); flex-direction: column-reverse; align-items: center; }
+.bm-toast-container--top-right {
+	top: 16px;
+	right: 16px;
+	flex-direction: column;
+	align-items: flex-end;
+}
+.bm-toast-container--top-left {
+	top: 16px;
+	left: 16px;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.bm-toast-container--bottom-right {
+	bottom: 16px;
+	right: 16px;
+	flex-direction: column-reverse;
+	align-items: flex-end;
+}
+.bm-toast-container--bottom-left {
+	bottom: 16px;
+	left: 16px;
+	flex-direction: column-reverse;
+	align-items: flex-start;
+}
+.bm-toast-container--top-center {
+	top: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	flex-direction: column;
+	align-items: center;
+}
+.bm-toast-container--bottom-center {
+	bottom: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	flex-direction: column-reverse;
+	align-items: center;
+}
 
 /* Тост */
 .bm-toast {
-  pointer-events: auto;
-  min-width: 260px;
-  max-width: 420px;
-  background: #111;
-  color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,.2);
-  padding: 12px 40px 12px 12px;
-  position: relative;
-  overflow: hidden;
-  font: 14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif;
+	pointer-events: auto;
+	min-width: 260px;
+	max-width: 420px;
+	background: #111;
+	color: #fff;
+	border-radius: 10px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+	padding: 12px 40px 12px 12px;
+	position: relative;
+	overflow: hidden;
+	font:
+		14px/1.4 system-ui,
+		-apple-system,
+		Segoe UI,
+		Roboto,
+		Ubuntu,
+		Cantarell,
+		Noto Sans,
+		Helvetica,
+		Arial,
+		sans-serif;
 }
 
-.bm-toast__inner { display: grid; gap: 6px; }
-.bm-toast__title { font-weight: 700; font-size: 14px; }
-.bm-toast__desc { opacity: .9; }
+.bm-toast__inner {
+	display: grid;
+	gap: 6px;
+}
+.bm-toast__title {
+	font-weight: 700;
+	font-size: 14px;
+}
+.bm-toast__desc {
+	opacity: 0.9;
+}
 
 /* Кнопка закрытия */
 .bm-toast__close {
-  position: absolute;
-  top: 6px; right: 6px;
-  background: transparent;
-  border: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-  width: 28px; height: 28px;
-  border-radius: 8px;
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	background: transparent;
+	border: none;
+	color: inherit;
+	font: inherit;
+	cursor: pointer;
+	width: 28px;
+	height: 28px;
+	border-radius: 8px;
 }
-.bm-toast__close:hover { background: rgba(255,255,255,.08); }
+.bm-toast__close:hover {
+	background: rgba(255, 255, 255, 0.08);
+}
 
 /* Типы */
-.bm-toast--success { background: #0d3b2e; }
-.bm-toast--info    { background: #0d1b3b; }
-.bm-toast--warn    { background: #3b320d; }
-.bm-toast--error   { background: #3b0d0d; }
+.bm-toast--success {
+	background: #0d3b2e;
+}
+.bm-toast--info {
+	background: #0d1b3b;
+}
+.bm-toast--warn {
+	background: #3b320d;
+}
+.bm-toast--error {
+	background: #3b0d0d;
+}
 
 /* Кастомные — по ключу */
 /* пример: .bm-toast--custom-foo { background: rebeccapurple; } */
 
 /* Прогресс */
 .bm-toast__progress {
-  position: absolute;
-  left: 0; bottom: 0;
-  height: 3px;
-  background: rgba(255,255,255,.7);
-  width: 100%;
-  transform-origin: left center;
-  animation: bm-toast-progress var(--bm-toast-progress-duration, 5000ms) linear forwards;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 3px;
+	background: rgba(255, 255, 255, 0.7);
+	width: 100%;
+	transform-origin: left center;
+	animation: bm-toast-progress var(--bm-toast-progress-duration, 5000ms) linear forwards;
 }
-@keyframes bm-toast-progress { from { transform: scaleX(1) } to { transform: scaleX(0) } }
+@keyframes bm-toast-progress {
+	from {
+		transform: scaleX(1);
+	}
+	to {
+		transform: scaleX(0);
+	}
+}
 
 /* Анимации входа/выхода */
-.bm-toast--enter { animation: bm-toast-enter .2s ease-out; }
-.bm-toast--leave { animation: bm-toast-leave .16s ease-in forwards; }
+.bm-toast--enter {
+	animation: bm-toast-enter 0.2s ease-out;
+}
+.bm-toast--leave {
+	animation: bm-toast-leave 0.16s ease-in forwards;
+}
 
-@keyframes bm-toast-enter { from { opacity: 0; transform: translateY(6px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-@keyframes bm-toast-leave { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(4px) scale(.98); } }
+@keyframes bm-toast-enter {
+	from {
+		opacity: 0;
+		transform: translateY(6px) scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+}
+@keyframes bm-toast-leave {
+	from {
+		opacity: 1;
+		transform: translateY(0) scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(4px) scale(0.98);
+	}
+}

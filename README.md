@@ -1,13 +1,14 @@
 # bm-toast
 
-Маленькая библиотека тостов на TypeScript без зависимостей. Очередь, лимит видимых, автозакрытие с прогресс-баром, колбэки и понятные стили (SCSS/CSS).
+Маленькая библиотека тостов на TypeScript без зависимостей. Очередь, лимит видимых, автозакрытие с прогресс-баром,
+колбэки и понятные стили (SCSS/CSS).
 
-* 🚫 Zero deps (только `tslib`)
-* 🧱 ESM + CJS + типы
-* 🧵 Очередь с FIFO/LIFO и лимитом видимых
-* ⏱️ Автозакрытие с анимированным прогресс-баром и паузой при скрытой вкладке
-* ♿ `role="alert"/"status"`, `aria-label` на кнопке закрытия
-* 🎯 Колбэки на все этапы (enqueue, show, hide, click, close, timeout)
+- 🚫 Zero deps (только `tslib`)
+- 🧱 ESM + CJS + типы
+- 🧵 Очередь с FIFO/LIFO и лимитом видимых
+- ⏱️ Автозакрытие с анимированным прогресс-баром и паузой при скрытой вкладке
+- ♿ `role="alert"/"status"`, `aria-label` на кнопке закрытия
+- 🎯 Колбэки на все этапы (enqueue, show, hide, click, close, timeout)
 
 ## Установка
 
@@ -33,9 +34,9 @@ import { showToast } from '@bm-front/bm-toast';
 import '@bm-front/bm-toast/style.css';
 
 showToast({
-  type: 'success',
-  title: 'Сохранено',
-  description: 'Ваши изменения применены',
+	type: 'success',
+	title: 'Сохранено',
+	description: 'Ваши изменения применены',
 });
 ```
 
@@ -47,17 +48,18 @@ showToast({
 
 Ключевые опции:
 
-* `type`: `'success' | 'info' | 'warn' | 'error' | 'custom'` (по умолчанию `'info'`)
-* `title?: string`, `description?: string`
-* `position`: `'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'` (по умолчанию `'top-right'`)
-* `closeButton`: `boolean | { label?: string; ariaLabel?: string }` (по умолчанию `true`)
-* `autoCloseMs`: `number | false` — автозакрытие, мс (по умолчанию `5000`)
-* `progress`: `boolean` — рисовать прогресс-бар (по умолчанию `true`)
-* `customKey`: `string` — для кастомного типа добавит класс `bm-toast--custom-<key>`
-* `className`: `string` — дополнительные классы
-* `id`: `string` — контролируемый идентификатор
-* `insertAt`: `'start' | 'end'` — куда в контейнере вставлять (по умолчанию `'start'`)
-* Колбэки: `onEnqueue`, `onShow`, `onHide`, `onClick`, `onCloseClick`, `onTimeout`
+- `type`: `'success' | 'info' | 'warn' | 'error' | 'custom'` (по умолчанию `'info'`)
+- `title?: string`, `description?: string`
+- `position`: `'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center'` (по умолчанию
+  `'top-right'`)
+- `closeButton`: `boolean | { label?: string; ariaLabel?: string }` (по умолчанию `true`)
+- `autoCloseMs`: `number | false` — автозакрытие, мс (по умолчанию `5000`)
+- `progress`: `boolean` — рисовать прогресс-бар (по умолчанию `true`)
+- `customKey`: `string` — для кастомного типа добавит класс `bm-toast--custom-<key>`
+- `className`: `string` — дополнительные классы
+- `id`: `string` — контролируемый идентификатор
+- `insertAt`: `'start' | 'end'` — куда в контейнере вставлять (по умолчанию `'start'`)
+- Колбэки: `onEnqueue`, `onShow`, `onHide`, `onClick`, `onCloseClick`, `onTimeout`
 
 ### `hideToast(id?: string): void`
 
@@ -71,20 +73,20 @@ showToast({
 import { setDefaultParameters } from '@bm-front/bm-toast';
 
 setDefaultParameters({
-  lib: {
-    maxVisible: 3,                 // максимум видимых тостов
-    containerClassName: 'bm-toast-container',
-    insertAt: 'start',             // вставка в видимом контейнере
-    queueInsert: 'end'             // 'end' (FIFO) или 'start' (LIFO)
-    // Глобальные колбэки: onEnqueue/onShow/onHide/onClick/onCloseClick/onTimeout
-  },
-  show: {
-    position: 'top-right',
-    autoCloseMs: 5000,
-    progress: true,
-    closeButton: true
-    // Любые поля ShowToastOptions → станут дефолтами
-  }
+	lib: {
+		maxVisible: 3, // максимум видимых тостов
+		containerClassName: 'bm-toast-container',
+		insertAt: 'start', // вставка в видимом контейнере
+		queueInsert: 'end', // 'end' (FIFO) или 'start' (LIFO)
+		// Глобальные колбэки: onEnqueue/onShow/onHide/onClick/onCloseClick/onTimeout
+	},
+	show: {
+		position: 'top-right',
+		autoCloseMs: 5000,
+		progress: true,
+		closeButton: true,
+		// Любые поля ShowToastOptions → станут дефолтами
+	},
 });
 ```
 
@@ -98,7 +100,7 @@ setDefaultParameters({
 setDefaultParameters({ lib: { maxVisible: 2, queueInsert: 'end' } });
 
 for (let i = 1; i <= 5; i++) {
-  showToast({ title: `Тост #${i}`, description: 'FIFO очередь' });
+	showToast({ title: `Тост #${i}`, description: 'FIFO очередь' });
 }
 ```
 
@@ -106,9 +108,9 @@ for (let i = 1; i <= 5; i++) {
 
 ```ts
 showToast({
-  type: 'custom',
-  customKey: 'purple',
-  title: 'Фиолетовый тост',
+	type: 'custom',
+	customKey: 'purple',
+	title: 'Фиолетовый тост',
 });
 
 // style.css / style.scss
@@ -119,10 +121,10 @@ showToast({
 
 ```ts
 showToast({
-  title: 'Нажми меня',
-  onClick: (id, ev) => console.log('click', id, ev),
-  onCloseClick: (id) => console.log('close', id),
-  onHide: (id) => console.log('hidden', id),
+	title: 'Нажми меня',
+	onClick: (id, ev) => console.log('click', id, ev),
+	onCloseClick: id => console.log('close', id),
+	onHide: id => console.log('hidden', id),
 });
 ```
 
@@ -148,16 +150,18 @@ setTimeout(() => hideToast(id), 1000);
 .bm-toast--success | --info | --warn | --error | --custom --custom-<key>
 ```
 
-Вы можете переопределить цвета, тени, шрифты и т.д. в своих стилях. Прогресс-бар — элемент `.bm-toast__progress` с анимацией по CSS.
+Вы можете переопределить цвета, тени, шрифты и т.д. в своих стилях. Прогресс-бар — элемент `.bm-toast__progress` с
+анимацией по CSS.
 
 ## A11y
 
-* Для типов `error`/`warn` используется `role="alert"`, иначе — `role="status"`.
-* Кнопка закрытия имеет `aria-label` (можно задать через `closeButton.ariaLabel`).
+- Для типов `error`/`warn` используется `role="alert"`, иначе — `role="status"`.
+- Кнопка закрытия имеет `aria-label` (можно задать через `closeButton.ariaLabel`).
 
 ## SSR / безопасное подключение
 
-Библиотека предназначена для браузера и использует `document`. Если рендерите на сервере — вызывайте API только на клиенте (например, в `useEffect`).
+Библиотека предназначена для браузера и использует `document`. Если рендерите на сервере — вызывайте API только на
+клиенте (например, в `useEffect`).
 
 ## Лицензия
 
