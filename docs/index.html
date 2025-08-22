@@ -60,14 +60,41 @@
 				grid-template-columns: repeat(12, 1fr);
 				gap: 16px;
 			}
+			/* Глобально стабильнее считать размеры с padding/бордерами */
+			*,
+			*::before,
+			*::after {
+				box-sizing: border-box;
+			}
+
+			/* ДОБАВИТЬ: недостающий спан на 6 колонок */
+			.span-6 {
+				grid-column: span 6;
+			}
+
+			/* Чтоб элементы форм занимали ширину своей грид-ячейки */
+			.controls select,
+			.controls input[type='number'],
+			.controls input[type='text'] {
+				width: 100%;
+			}
+
+			/* Можно чуть выровнять старт грид-элементов (опционально) */
+			.grid {
+				align-items: start;
+			}
+
 			.span-8 {
 				grid-column: span 8;
 			}
 			.span-4 {
 				grid-column: span 4;
 			}
+
+			/* На мобиле логично стакать и .span-6 тоже */
 			@media (max-width: 900px) {
 				.span-8,
+				.span-6,
 				.span-4 {
 					grid-column: 1 / -1;
 				}
