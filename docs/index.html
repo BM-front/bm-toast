@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>bm-toast — Demo</title>
+		<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@bm_front/bm-toast@latest/dist/style.css" />
+		<style>
+			:root {
+				--bg: #0b1220;
+				--fg: #e5e7eb;
+				--muted: #9ca3af;
+				--card: #0f172a;
+				--accent: #3b82f6;
+			}
+			html,
+			body {
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				font:
+					16px/1.5 system-ui,
+					-apple-system,
+					Segoe UI,
+					Roboto,
+					Ubuntu,
+					Cantarell,
+					Noto Sans,
+					Helvetica,
+					Arial,
+					sans-serif;
+				background: radial-gradient(1200px 600px at 10% 0%, #111827 0%, var(--bg) 50%, #0a0f1c 100%);
+				color: var(--fg);
+			}
+			.container {
+				max-width: 980px;
+				margin: 40px auto;
+				padding: 0 16px;
+			}
+			h1 {
+				margin: 0 0 8px;
+				font-size: 28px;
+			}
+			.sub {
+				color: var(--muted);
+				margin-bottom: 24px;
+			}
+			.card {
+				background: rgba(15, 23, 42, 0.85);
+				border: 1px solid rgba(148, 163, 184, 0.15);
+				border-radius: 14px;
+				padding: 18px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+				backdrop-filter: blur(4px);
+			}
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(12, 1fr);
+				gap: 16px;
+			}
+			.span-8 {
+				grid-column: span 8;
+			}
+			.span-4 {
+				grid-column: span 4;
+			}
+			@media (max-width: 900px) {
+				.span-8,
+				.span-4 {
+					grid-column: 1 / -1;
+				}
+			}
+			.controls label {
+				display: block;
+				font-size: 12px;
+				color: var(--muted);
+				margin-bottom: 6px;
+			}
+			.controls .row {
+				display: flex;
+				gap: 8px;
+				flex-wrap: wrap;
+				margin-bottom: 12px;
+			}
+			select,
+			input[type='number'],
+			input[type='text'] {
+				background: #0b1220;
+				color: var(--fg);
+				border: 1px solid rgba(148, 163, 184, 0.25);
+				border-radius: 10px;
+				padding: 8px 10px;
+				outline: none;
+				min-width: 120px;
+			}
+			input[type='checkbox'] {
+				transform: translateY(1px);
+			}
+			.btn {
+				appearance: none;
+				border: none;
+				cursor: pointer;
+				padding: 10px 14px;
+				border-radius: 10px;
+				color: white;
+				background: #1f2937;
+			}
+			.btn:hover {
+				filter: brightness(1.1);
+			}
+			.btn-success {
+				background: #065f46;
+			}
+			.btn-info {
+				background: #1e40af;
+			}
+			.btn-warn {
+				background: #92400e;
+			}
+			.btn-error {
+				background: #7f1d1d;
+			}
+			.btn-queue {
+				background: #6b7280;
+			}
+			.btn-outline {
+				background: transparent;
+				border: 1px solid rgba(148, 163, 184, 0.35);
+				color: #e5e7eb;
+			}
+			.stack {
+				display: flex;
+				gap: 8px;
+				flex-wrap: wrap;
+			}
+			.foot {
+				margin-top: 22px;
+				color: var(--muted);
+				font-size: 13px;
+			}
+			/* demo custom color */
+			.bm-toast.demo-purple {
+				background: rebeccapurple;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1>bm-toast — Демонстрация</h1>
+			<div class="sub"
+				>Лёгкие тосты на TypeScript: очередь, лимиты видимости, автозакрытие с прогрессом и колбэки.</div
+			>
+
+			<div class="grid">
+				<div class="card span-8">
+					<div class="stack" style="margin-bottom: 12px">
+						<button class="btn btn-success" data-type="success">Success</button>
+						<button class="btn btn-info" data-type="info">Info</button>
+						<button class="btn btn-warn" data-type="warn">Warn</button>
+						<button class="btn btn-error" data-type="error">Error</button>
+						<button class="btn btn-outline" data-type="custom">Custom (purple)</button>
+						<button class="btn btn-queue" id="queue5">Queue ×5</button>
+						<button class="btn btn-outline" id="hideOldest">Hide oldest</button>
+					</div>
+
+					<div class="controls grid">
+						<div class="span-4">
+							<label>Позиция</label>
+							<select id="position">
+								<option>top-right</option>
+								<option>top-left</option>
+								<option>bottom-right</option>
+								<option>bottom-left</option>
+								<option>top-center</option>
+								<option>bottom-center</option>
+							</select>
+						</div>
+						<div class="span-4">
+							<label>Автозакрытие (мс)</label>
+							<input id="autoCloseMs" type="number" min="0" step="100" value="5000" />
+						</div>
+						<div class="span-4">
+							<label>Прогресс</label>
+							<div class="row"><input id="progress" type="checkbox" checked /> <span>Включен</span></div>
+						</div>
+
+						<div class="span-4">
+							<label>Insert in container</label>
+							<select id="insertAt">
+								<option>start</option>
+								<option>end</option>
+							</select>
+						</div>
+						<div class="span-4">
+							<label>Queue insert (FIFO/LIFO)</label>
+							<select id="queueInsert">
+								<option>end</option>
+								<option>start</option>
+							</select>
+						</div>
+						<div class="span-4">
+							<label>Max visible</label>
+							<input id="maxVisible" type="number" min="1" step="1" value="3" />
+						</div>
+
+						<div class="span-6">
+							<label>Заголовок</label>
+							<input id="title" type="text" placeholder="Сохранено" />
+						</div>
+						<div class="span-6">
+							<label>Описание</label>
+							<input id="desc" type="text" placeholder="Ваши изменения применены" />
+						</div>
+					</div>
+
+					<div class="foot"
+						>Подключение идёт из CDN jsDelivr; для офлайн-версии см. комментарии внизу скрипта.</div
+					>
+				</div>
+
+				<div class="card span-4">
+					<div style="font-size: 14px; color: var(--muted)">
+						<p><b>Подключение:</b></p>
+						<code>import &#123; showToast &#125; from '@bm_front/bm-toast'</code>
+						<p style="margin-top: 10px"><b>Глобальные дефолты:</b></p>
+						<code>setDefaultParameters(&#123; lib: &#123; maxVisible, queueInsert &#125; &#125;)</code>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script type="module">
+			import {
+				showToast,
+				hideToast,
+				setDefaultParameters,
+			} from 'https://cdn.jsdelivr.net/npm/@bm_front/bm-toast@latest/dist/index.js';
+
+			// Fallback для локальной разработки без CDN:
+			// import { showToast, hideToast, setDefaultParameters } from '../dist/index.js';
+			// (() => { const l = document.createElement('link'); l.rel='stylesheet'; l.href='../dist/style.css'; document.head.append(l); })();
+
+			const $ = sel => document.querySelector(sel);
+
+			function applyLibDefaults() {
+				setDefaultParameters({
+					lib: {
+						maxVisible: Number($('#maxVisible').value || 3),
+						queueInsert: $('#queueInsert').value,
+						insertAt: $('#insertAt').value,
+					},
+				});
+			}
+
+			function makeToast(type) {
+				const title = $('#title').value.trim();
+				const desc = $('#desc').value.trim();
+				const autoClose = $('#autoCloseMs').valueAsNumber;
+				const progress = $('#progress').checked;
+				const position = $('#position').value;
+
+				showToast({
+					type,
+					title: title || type.toUpperCase(),
+					description: desc || 'Пример уведомления',
+					position,
+					autoCloseMs: Number.isFinite(autoClose) ? autoClose : 5000,
+					progress,
+					insertAt: $('#insertAt').value,
+					closeButton: true,
+					customKey: type === 'custom' ? 'purple' : undefined,
+					className: type === 'custom' ? 'demo-purple' : '',
+				});
+			}
+
+			// wire controls
+			['insertAt', 'queueInsert', 'maxVisible'].forEach(id =>
+				$('#' + id).addEventListener('change', applyLibDefaults),
+			);
+			applyLibDefaults();
+			document
+				.querySelectorAll('[data-type]')
+				.forEach(btn => btn.addEventListener('click', () => makeToast(btn.dataset.type)));
+			$('#queue5').addEventListener('click', () => {
+				for (let i = 1; i <= 5; i++) makeToast('info');
+			});
+			$('#hideOldest').addEventListener('click', () => hideToast());
+		</script>
+	</body>
+</html>
