@@ -1,6 +1,6 @@
 {
   "name": "@bm-front/bm-toast",
-  "version": "0.2.1",
+  "version": "0.2.0",
   "description": "Tiny TypeScript toast notifications with queue, callbacks and styles. Zero deps.",
   "keywords": [
     "toast",
@@ -60,6 +60,7 @@
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "dev": "rollup -c -w",
+    "release": "node scripts/release.js",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run typecheck && npm run build",
     "prepare": "npm run build"
@@ -70,6 +71,8 @@
     "@rollup/plugin-typescript": "^12.1.4",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.0",
+    "inquirer": "^12.9.3",
+    "ora": "^8.2.0",
     "postcss": "^8.5.6",
     "rimraf": "^6.0.1",
     "rollup": "^4.47.1",
@@ -77,9 +80,7 @@
     "rollup-plugin-dts": "^6.2.3",
     "rollup-plugin-postcss": "^4.0.2",
     "sass": "^1.90.0",
-    "typescript": "^5.9.2"
-  },
-  "dependencies": {
+    "typescript": "^5.9.2",
     "tslib": "^2.8.1"
   }
 }
