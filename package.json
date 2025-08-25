@@ -1,6 +1,6 @@
 {
   "name": "@bm-front/bm-toast",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Tiny TypeScript toast notifications with queue, callbacks and styles. Zero deps.",
   "keywords": [
     "toast",
