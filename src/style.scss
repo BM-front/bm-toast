@@ -75,6 +75,11 @@
 		max-width: 420px;
 		width: auto;
 	}
+
+	&:not(:has(.bm-toast__progress)) {
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
 }
 
 .bm-toast.bm-toast--success {
