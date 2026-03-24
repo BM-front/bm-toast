@@ -1,5 +1,7 @@
 /* Базовые контейнеры (позиционирование — только через CSS) */
 .bm-toast-container {
+	--bm-toast--window-space: 16px;
+
 	position: fixed;
 	z-index: 9999;
 	display: flex;
@@ -9,38 +11,38 @@
 
 /* Позиции */
 .bm-toast-container--top-right {
-	top: 16px;
-	right: 16px;
+	top: var(--bm-toast--window-space);
+	right: var(--bm-toast--window-space);
 	flex-direction: column;
 	align-items: flex-end;
 }
 .bm-toast-container--top-left {
-	top: 16px;
-	left: 16px;
+	top: var(--bm-toast--window-space);
+	left: var(--bm-toast--window-space);
 	flex-direction: column;
 	align-items: flex-start;
 }
 .bm-toast-container--bottom-right {
-	bottom: 16px;
-	right: 16px;
+	bottom: var(--bm-toast--window-space);
+	right: var(--bm-toast--window-space);
 	flex-direction: column-reverse;
 	align-items: flex-end;
 }
 .bm-toast-container--bottom-left {
-	bottom: 16px;
-	left: 16px;
+	bottom: var(--bm-toast--window-space);
+	left: var(--bm-toast--window-space);
 	flex-direction: column-reverse;
 	align-items: flex-start;
 }
 .bm-toast-container--top-center {
-	top: 16px;
+	top: var(--bm-toast--window-space);
 	left: 50%;
 	transform: translateX(-50%);
 	flex-direction: column;
 	align-items: center;
 }
 .bm-toast-container--bottom-center {
-	bottom: 16px;
+	bottom: var(--bm-toast--window-space);
 	left: 50%;
 	transform: translateX(-50%);
 	flex-direction: column-reverse;
@@ -49,76 +51,149 @@
 
 /* Тост */
 .bm-toast {
+	--type-color-success: #0f9f0f;
+	--type-color-error: #c10002;
+	--type-color-warn: #ffbc30;
+	--type-color-info: #4690ff;
+	--type-color-custom: rgba(0, 0, 0, 0.3);
+	width: calc(100vw - var(--bm-toast--window-space) * 2);
+
+	font-family: inherit;
 	pointer-events: auto;
-	min-width: 260px;
-	max-width: 420px;
-	background: #111;
-	color: #fff;
+
+	background: #fff;
+	color: #111827;
 	border-radius: 10px;
-	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-	padding: 12px 40px 12px 12px;
+	box-shadow: 0 4px 34px 0 rgba(13, 12, 26, 0.08);
+	border: 1px solid #e5e7eb;
+	padding: 13px 30px 17px 12px;
 	position: relative;
 	overflow: hidden;
+
+	@media (min-width: 744px) {
+		min-width: 313px;
+		max-width: 420px;
+		width: auto;
+	}
+}
+
+.bm-toast.bm-toast--success {
+	--type-color: var(--type-color-success);
+}
+.bm-toast.bm-toast--info {
+	--type-color: var(--type-color-info);
+}
+.bm-toast.bm-toast--warn {
+	--type-color: var(--type-color-warn);
+}
+.bm-toast.bm-toast--error {
+	--type-color: var(--type-color-error);
+}
+.bm-toast.bm-toast--custom {
+	--type-color: var(--type-color-custom);
 }
 
 .bm-toast__inner {
 	display: grid;
-	gap: 6px;
+	grid-template-columns: auto 1fr;
+	gap: 8px;
+	align-items: start;
 }
+
+.bm-toast__icon {
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+	margin-top: 1px;
+	color: var(--type-color);
+
+	svg {
+		width: 100%;
+		height: 100%;
+		display: block;
+	}
+}
+
+.bm-toast__body {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+
+	&:not(:has(.bm-toast__desc)) {
+		align-self: center;
+		.bm-toast__title {
+			font-size: 14px;
+			line-height: 1.4;
+		}
+	}
+}
+
 .bm-toast__title {
-	font-weight: 700;
-	font-size: 14px;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 1.2;
+	color: #01030e;
 }
+
 .bm-toast__desc {
-	opacity: 0.9;
+	line-height: 1.4;
+	color: #67686e;
+
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	letter-spacing: -0.28px;
 }
 
 /* Кнопка закрытия */
 .bm-toast__close {
 	position: absolute;
-	top: 6px;
-	right: 6px;
+	top: 10px;
+	right: 10px;
 	background: transparent;
 	border: none;
-	color: inherit;
-	font: inherit;
+	color: #888;
+	transition:
+		color 0.1s ease-in-out,
+		background-color 0.1s ease-in-out,
+		transform 0.1s ease-in-out;
 	cursor: pointer;
-	width: 28px;
-	height: 28px;
-	border-radius: 8px;
-}
-.bm-toast__close:hover {
-	background: rgba(255, 255, 255, 0.08);
-}
+	padding: 0;
+	width: 16px;
+	height: 16px;
+	border-radius: 2px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-/* Типы */
-.bm-toast--success {
-	background: #0d3b2e;
-}
-.bm-toast--info {
-	background: #0d1b3b;
-}
-.bm-toast--warn {
-	background: #3b320d;
-}
-.bm-toast--error {
-	background: #3b0d0d;
-}
+	svg {
+		width: 16px;
+		height: 16px;
+		display: block;
+		flex-shrink: 0;
+	}
 
-/* Кастомные — по ключу */
-/* пример: .bm-toast--custom-foo { background: rebeccapurple; } */
+	&:hover {
+		background-color: #f3f4f6;
+		color: #374151;
+	}
+	&:active {
+		transform: scale(0.9);
+	}
+}
 
 /* Прогресс */
 .bm-toast__progress {
 	position: absolute;
 	left: 0;
 	bottom: 0;
-	height: 3px;
-	background: rgba(255, 255, 255, 0.7);
+	height: 5px;
 	width: 100%;
 	transform-origin: left center;
 	animation: bm-toast-progress var(--bm-toast-progress-duration, 5000ms) linear forwards;
+	background: var(--type-color);
 }
+
 @keyframes bm-toast-progress {
 	from {
 		transform: scaleX(1);

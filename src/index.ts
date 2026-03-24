@@ -3,6 +3,8 @@
  * Версия: 0.2
  */
 
+import { icons } from './icons';
+
 // ===== Публичные типы =====
 export type ToastType = 'success' | 'info' | 'warn' | 'error' | 'custom';
 export type ToastPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center';
@@ -405,6 +407,8 @@ function createToastElement(item: InternalToast): HTMLElement {
 	const $icon = document.createElement('span');
 	$icon.className = 'bm-toast__icon';
 	$icon.setAttribute('aria-hidden', 'true');
+	const iconSvg = icons[opts.type];
+	if (iconSvg) $icon.innerHTML = iconSvg;
 	$inner.appendChild($icon);
 
 	const $body = document.createElement('div');
@@ -429,10 +433,16 @@ function createToastElement(item: InternalToast): HTMLElement {
 	if (opts.closeButton) {
 		const $btn = document.createElement('button');
 		$btn.className = 'bm-toast__close';
-		const label = typeof opts.closeButton === 'object' ? (opts.closeButton.label ?? '✕') : '✕';
+		const defaultCloseIcon = `
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none">
+  		<path d="M11.5292 3.52876C11.7896 3.26841 12.2116 3.26841 12.472 3.52876C12.7323 3.78911 12.7323 4.21112 12.472 4.47147L8.94331 8.00011L12.472 11.5288C12.7323 11.7891 12.7323 12.2111 12.472 12.4715C12.2116 12.7318 11.7896 12.7318 11.5292 12.4715L8.0006 8.94282L4.47195 12.4715C4.21161 12.7318 3.7896 12.7318 3.52925 12.4715C3.2689 12.2111 3.2689 11.7891 3.52925 11.5288L7.05789 8.00011L3.52925 4.47147C3.2689 4.21112 3.2689 3.78911 3.52925 3.52876C3.7896 3.26841 4.21161 3.26841 4.47195 3.52876L8.0006 7.0574L11.5292 3.52876Z" fill="currentColor"/>
+		</svg>
+		`;
+		const label =
+			typeof opts.closeButton === 'object' ? (opts.closeButton.label ?? defaultCloseIcon) : defaultCloseIcon;
 		const aria = typeof opts.closeButton === 'object' ? (opts.closeButton.ariaLabel ?? 'Закрыть') : 'Закрыть';
 		$btn.setAttribute('aria-label', aria);
-		$btn.textContent = label;
+		$btn.innerHTML = label;
 		$btn.addEventListener('click', ev => {
 			opts.onCloseClick?.(id, ev);
 			beginHide(item, 'close');
