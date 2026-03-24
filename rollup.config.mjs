@@ -5,6 +5,10 @@ import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import dts from 'rollup-plugin-dts';
 import copy from 'rollup-plugin-copy';
+import serve from 'rollup-plugin-serve';
+import livereload from 'rollup-plugin-livereload';
+
+const isDev = process.env.ROLLUP_WATCH === 'true';
 
 export default [
 	// JavaScript bundle
@@ -20,6 +24,8 @@ export default [
 			typescript({ tsconfig: './tsconfig.json', declaration: false }),
 			// Copy src/style.scss to dist/style.scss
 			copy({ targets: [{ src: 'src/style.scss', dest: 'dist' }] }),
+			isDev && serve({ contentBase: ['dev', 'dist'], port: 3000, open: true }),
+			isDev && livereload({ watch: ['dev', 'dist'] }),
 		],
 		treeshake: true,
 		onwarn(warning, warn) {
